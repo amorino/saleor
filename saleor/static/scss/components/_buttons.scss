@@ -4,15 +4,12 @@ a.btn {
 .btn {
   transition: 0.3s;
   border-radius: $button-border-radius;
-  text-transform: uppercase;
-  font-weight: 300;
   font-size: 1rem;
   cursor: pointer;
   font-family: $font-family-sans-serif;
   white-space: normal;
   line-height: 1.25;
   &.home__button {
-    text-transform: uppercase;
     font-size: $h3-font-size;
     color: $white;
     background-color: transparent;
@@ -26,41 +23,41 @@ a.btn {
   &-primary {
     border: none;
     color: $white;
-    padding: $global-padding $global-padding * 4;
+    padding: 10px 30px;
     &:hover {
-      background-color: #42beab;
+      background-color: #d4268e;
       border: none;
       color: $white;
     }
   }
   &.secondary {
     border: 1px solid $light-turquoise;
-    padding: $global-padding $global-padding * 2;
+    padding: 10px 30px;
     background-color: $white;
     color: $light-turquoise;
     &:hover {
-      border-color: #42beab;
-      color: #42beab;
+      border-color: #d4268e;
+      color: #d4268e;
     }
   }
   &.danger {
     border: 1px solid $red;
     background-color: transparent;
     color: $red;
-    padding: $global-padding $global-padding * 4;
+    padding: 10px 30px;
     &:hover {
       background-color: $dark-red;
       color: $white;
     }
   }
   &.narrow {
-    padding: $global-padding / 2 $global-padding * 2.5;
+    padding: 10px 30px;
   }
   &.gray {
     background-color: $gray;
     border: 0;
     color: $white;
-    padding: $global-padding $global-padding * 4;
+    padding: 10px 30px;
     &:hover {
       background-color: $darken-gray;
     }

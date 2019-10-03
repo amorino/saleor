@@ -1,6 +1,5 @@
 .navigation {
   ul {
-    border-bottom: 1px solid $gray;
     margin-bottom: $global-margin;
     display: block;
     text-align: center;
@@ -19,10 +18,9 @@
       a {
         color: $body-color;
         transition: 0.3s;
-        text-transform: uppercase;
         display: inline-block;
         padding: $global-padding * 1.5;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         &:hover {
           color: rgba($body-color, 0.6);
         }
@@ -61,7 +59,7 @@
           }
 
           .container {
-            padding: $global-padding;
+            // padding: $global-padding;
             max-height: 28rem;
 
             > ul {
@@ -114,16 +112,9 @@
 
     @include media-breakpoint-down(sm) {
       .nav-item__submenu ul {
-        text-align: center;
-        font-size: 0.8rem;
-
         ul {
           padding-left: 0;
           font-size: 0.7rem;
-        }
-
-        li {
-          text-align: center;
         }
       }
     }
@@ -132,6 +123,12 @@
 
 .navbar {
   padding: 0;
+  .dropdown-menu {
+    border: none;
+    a {
+      color: #343a40;
+    }
+  }
   @include media-breakpoint-down(sm) {
     > .container-fluid {
       padding: 0;
@@ -153,7 +150,6 @@
       margin-bottom: 0;
       color: $skull-gray;
       line-height: 1.9rem;
-      text-transform: uppercase;
       width: 100%;
     }
     ul {
@@ -166,7 +162,7 @@
         a {
           color: $body-color;
           font-size: 0.7rem;
-          text-transform: uppercase;
+          // text-transform: uppercase;
         }
       }
     }
@@ -175,11 +171,14 @@
     padding: $global-padding * 2 0;
     display: flex;
     align-items: center;
-    a svg {
-      height: 38px;
-      width: auto;
-      max-width: 113px;
+    a{
+      padding: 0 20px;
+      svg {
+      width: 100%;
+      max-height: 40px;
     }
+    }
+
     .menu-icon-mobile {
       position: relative;
       display: inline-block;
@@ -200,17 +199,13 @@
     }
   }
   &__search {
-    padding: $global-padding * 2 0;
+    padding: $global-padding * 2.5 0;
     position: relative;
     form {
       svg {
         width: 18px;
         height: 18px;
-        margin-left: 10px;
         vertical-align: middle;
-      }
-      .btn {
-        padding: $global-padding;
       }
     }
     .mobile-search-icon {
@@ -219,7 +214,6 @@
     }
   }
   &__brand {
-    background-color: $light-gray;
     @include media-breakpoint-down(sm) {
       position: fixed;
       top: 0;
@@ -279,20 +273,23 @@
         }
         .badge {
           position: absolute;
-          right: 10px;
-          top: 30px;
-          background-color: $light-turquoise;
-          border-radius: 100px;
-          color: $white;
-          width: 30px;
-          height: 30px;
+          height: 20px;
+          border-radius: 10px;
+          min-width: 20px;
+          color: #fff;
+          line-height: 20px;
           text-align: center;
-          line-height: 2;
+          padding: 0 6px;
+          font-size: 12px;
+          font-weight: normal;
+          white-space: nowrap;
+          box-shadow: 0 0 0 1px #fff;
+          z-index: 10;
+          background-color: $primary;
           &.empty {
             background-color: $darken-gray;
           }
           @include media-breakpoint-down(sm) {
-            right: 0;
             top: 20px;
           }
         }

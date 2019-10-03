@@ -1,6 +1,6 @@
 <mj-section>
   <mj-column>
-    <mj-text>
+    <mj-text color="#cccccc">
       {% blocktrans trimmed context "Base email text" %}
         This is an automatically generated e-mail, please do not reply.
       {% endblocktrans %}

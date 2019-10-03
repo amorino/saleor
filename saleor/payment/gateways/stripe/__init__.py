@@ -18,6 +18,8 @@ from .utils import (
     shipping_to_stripe_dict,
 )
 
+from .forms import StripePaymentModalForm
+
 
 def get_client_token(**_):
     """Not implemented for stripe gateway currently.
@@ -42,10 +44,12 @@ def authorize(
         if payment_information.shipping
         else None
     )
-
     try:
         intent = client.PaymentIntent.create(
-            payment_method=payment_information.token,
+            payment_method_data={
+                "card[token]": payment_information.token,
+                "type": "card",
+            },
             amount=stripe_amount,
             currency=currency,
             confirmation_method="manual",
@@ -56,7 +60,11 @@ def authorize(
             shipping=shipping,
         )
         if config.store_customer and not customer_id:
-            customer = client.Customer.create(payment_method=intent.payment_method)
+            customer = client.Customer.create(
+                payment_method=intent.payment_method,
+                email=payment_information.customer_email,
+                description="Cliente: " + payment_information.customer_email,
+            )
             customer_id = customer.id
 
     except stripe.error.StripeError as exc:
@@ -152,6 +160,14 @@ def void(payment_information: PaymentData, config: GatewayConfig) -> GatewayResp
             raw_response=refund,
         )
     return response
+
+
+def create_form(data, payment_information, connection_params) -> StripePaymentModalForm:
+    return StripePaymentModalForm(
+        data=data,
+        payment_information=payment_information,
+        gateway_params=connection_params,
+    )
 
 
 def list_client_sources(

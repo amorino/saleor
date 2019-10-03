@@ -66,6 +66,8 @@ html-to-draftjs = "*"
 draftjs-sanitizer = "*"
 sentry-sdk = "*"
 tqdm = "*"
+django-environ = "~=0.4"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"

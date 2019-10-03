@@ -31,9 +31,6 @@
       @include media-breakpoint-down(sm) {
         width: 47%;
       }
-      input {
-        height: 54px;
-      }
     }
     &__button {
       width: 80%;
@@ -53,7 +50,6 @@
       padding-right: $global-padding;
     }
     &__form-error {
-      margin-top: -$global-padding / 2;
       margin-bottom: $global-margin;
     }
     &__description {

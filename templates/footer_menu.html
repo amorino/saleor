@@ -5,11 +5,11 @@
 
 {% for item in menu_items %}
 {% with children=item.child_items %}
-  <div class="col-6 col-md-2">
+  <div class="col-md-3 col-12">
     <ul class="menu">
       <li class="{% if children %}nav-item__dropdown{% endif %} menu__item">
         <a href="{{ item.url }}">
-          {% get_menu_item_name lang_code=LANGUAGE_CODE menu_item=item %}
+          <h2>{% get_menu_item_name lang_code=LANGUAGE_CODE menu_item=item %}</h2>
         </a>
         {% if children %}
         <hr />
@@ -20,7 +20,6 @@
                 <a href="{{ child.url }}">
                   {% get_menu_item_name lang_code=LANGUAGE_CODE menu_item=child %}
                 </a>
-
                 {% with grandchildren=child.child_items %}
                   {% if grandchildren %}
                     <ul>

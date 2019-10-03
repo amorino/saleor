@@ -30,9 +30,10 @@
         <div class="row no-results">
           <div class="col-12">
             <h2>{% trans "Search:" %} <strong>{{ query }}</strong></h2>
-            <svg data-src="{% static "images/no-results-bg.svg" %}" width="360" height="360"/>
+            <img data-src="{% static 'images/empty-checkout-bg.jpg' %}"
+              data-srcset="{% static 'images/empty-checkout-bg.jpg' %} 1x, {% static 'images/empty-checkout-bg@2x.jpg' %} 2x"
+              class="lazyload lazypreload">
             <p>{% trans "Sorry, no matches found for your request." context "Search without results text" %}</p>
-            <p>{% trans "Try again or shop new arrivals." context "Search without results text" %}</p>
           </div>
         </div>
       {% endif %}

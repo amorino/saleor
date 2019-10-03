@@ -73,7 +73,8 @@
   }
   &__empty {
     img {
-      margin: $global-margin 0;
+      margin: 2rem 0;
+      max-width: 200px;
     }
   }
   @include media-breakpoint-up(md) {

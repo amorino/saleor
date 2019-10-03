@@ -29,7 +29,7 @@
   }
   .panel-footer {
     color: $skull-gray;
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
   .text-center {
     position: relative;
@@ -42,10 +42,10 @@
     }
     &__text {
       position: absolute;
-      top: 0.5rem;
-      left: 0.15rem;
+      top: 14px;
+      left: -4px;
       color: $white;
-      font-size: 0.8rem;
+      font-size: 8px;
       text-transform: uppercase;
       transform: rotate(-45deg);
       font-weight: 500;

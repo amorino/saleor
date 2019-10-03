@@ -1,4 +1,8 @@
 <mj-style inline="inline">
+  body {
+    background-color: #ffffff;
+  }
+
   .no-display {
     display: none;
   }
@@ -20,7 +24,6 @@
   }
 </mj-style>
 <mj-style>
-
   address {
     font-style: inherit;
     font-family: Ubuntu, Helvetica, Arial;

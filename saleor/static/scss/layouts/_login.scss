@@ -1,7 +1,7 @@
 .login {
   margin-top: $global-padding * 2;
-  border-radius: 4px;
-  border: 1px solid $gray;
+  // border-radius: 4px;
+  border: 1px solid $light-gray;
   @include media-breakpoint-down(sm) {
     padding-top: 0;
   }
@@ -28,9 +28,13 @@
       img {
         margin: $global-margin / 2 auto $global-margin * 0.9;
         display: block;
+        width: 100%;
+        max-width: 300px;
         @include media-breakpoint-up(md) {
           &.checkout-pirate {
             margin-bottom: $global-margin * 3.2;
+            width: 100%;
+            max-width: 400px;
           }
         }
       }
@@ -41,7 +45,6 @@
     text-decoration: none;
   }
   &__form {
-    background: $light-gray;
     padding: $global-padding * 2 $global-padding * 5;
     @include media-breakpoint-down(md) {
       padding: $global-padding * 2;
@@ -54,6 +57,10 @@
     }
   }
   &__forgot-password {
+    img {
+        width: 100%;
+        max-width: 300px;
+      }
     h2 {
       padding-top: $global-padding * 2;
       text-transform: uppercase;
@@ -68,11 +75,6 @@
       padding-bottom: $global-padding;
       @include media-breakpoint-down(sm) {
         max-width: 80%;
-      }
-    }
-    .login__btn-group {
-      img {
-        padding-top: $global-padding * 2;
       }
     }
   }

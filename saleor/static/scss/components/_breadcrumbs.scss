@@ -1,12 +1,10 @@
 .breadcrumbs {
   margin: $global-margin 0 $global-margin * 1.5;
-  text-transform: uppercase;
   li {
     display: inline;
     &:last-of-type {
       a {
-        color: $skull-gray;
-        font-weight: 600;
+        color: $sushi;
       }
     }
     &:not(:first-of-type) {
@@ -18,7 +16,7 @@
       margin-left: $global-margin / 3;
     }
     a {
-      color: $gray;
+      color: #c2c78e;
     }
   }
 }

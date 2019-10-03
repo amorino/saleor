@@ -1,59 +1,71 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
+{% load slider from shop %}
 
 {% block content %}
-  <div class="home">
-    <div class="row">
-      <div class="col-sm-12 home__block1">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Promo & Sale" context "Homepage title" %}</h1>
-                <h2>{% trans "from the Northpole" context "Homepage title" %}</h2>
-                  <a class="btn btn-secondary home__button" href="#">
-                    {% trans "Shop now" context "Homepage action" %}
-                  </a>
-              </div>
-            </div>
-          </div>
-        </div>
+{% slider %}
+<div class="about-section">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-12 col-md-8">
+      <h1>Acerca</h1>
+      <p>En NutriCass nos importa tu tiempo, tu comodidad y la salud de tu familia, por lo que para nosotros es fundamental la calidad y frescura de nuestros alimentos al igual que la eficiencia del servicio que brindamos. Permítenos llenar tu hogar de felicidad.</p>
+      <p>NutriCass es una empresa dedicada a la distribución de alimentos frescos y del día. ¡Desde la Central de Abastos hasta la puerta de tu hogar!</p>
+      <p>Somos una empresa comprometida con el medio ambiente ya que utilizamos la menor cantidad posible de bolsas de plástico y las cajas en las que repartimos las frutas y verduras son reutilizadas. ¡Súmate a nuestra causa reutilizando las cajas o bolsas que se utilicen!</p>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6 home__block2">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Size & Colours" context "Homepage title" %}</h1>
-                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-6 home__block3">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Digital Downloads" context "Homepage title" %}</h1>
-                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% if products %}
-      <div class="home__featured">
-        <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
-        <div class="row">
-          {% include "product/_items.html" %}
-        </div>
-      </div>
-    {% endif %}
-    <script type="application/ld+json">{{ webpage_schema|safe }}</script>
   </div>
+</div>
+<div class="row ">
+  <div class="process-wrapper ant-layout">
+    <div class="ant-row-flex ant-row-flex-center">
+      <div class="col-sm-12">
+        <h1>Proceso</h1>
+      </div>
+    </div>
+    <div class="row" style="margin-left:-12px;margin-right:-12px;">
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="circle-wrapper">
+          <div class="circle">
+            <img src="{% static 'images/circulo_01.png' %}">
+          </div>
+        </div>
+        <h2>Contáctanos y haz tu pedido.</h2>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="circle-wrapper">
+          <div class="circle">
+            <img src="{% static 'images/circulo_02.png' %}">
+          </div>
+        </div>
+        <h2>Armamos el pedido y lo envíamos.</h2>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="circle-wrapper">
+          <div class="circle">
+            <img src="{% static 'images/circulo_03.png' %}">
+          </div>
+        </div>
+        <h2>¡Llega a la puerta de tu casa!</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="about-section">
+ <div class="row justify-content-md-center">
+    <div class="col-sm-12 col-md-8">
+     <h1>Misión</h1>
+      <p>Proporcionar alimentos frescos con la mejor calidad para nuestros clientes ofreciéndoles un excelente servicio.</p>
+    </div>
+  </div>
+</div>
+{% if products %}
+<div class="home__featured">
+  <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
+  <div class="row">
+    {% include "product/_items.html" %}
+  </div>
+</div>
+{% endif %}
+<script type="application/ld+json">{{ webpage_schema|safe }}</script>
+</div>
 {% endblock %}

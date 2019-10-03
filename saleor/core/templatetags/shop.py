@@ -27,6 +27,12 @@ def footer_menu(site_menu=None):
     return {"menu_items": menu_items}
 
 
+@register.inclusion_tag("slider.html")
+def slider(slider_items=None):
+    slider_items = slider_items.json_content if slider_items else []
+    return {"slider_items": slider_items}
+
+
 @register.simple_tag
 def get_menu_item_name(menu_item, lang_code):
     translated = menu_item["translations"].get(lang_code)

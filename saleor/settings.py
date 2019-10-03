@@ -1,8 +1,9 @@
 import ast
 import os.path
 import warnings
+import environ
 
-import dj_database_url
+# import dj_database_url
 import dj_email_url
 import django_cache_url
 import sentry_sdk
@@ -10,6 +11,9 @@ from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django_prices.utils.formatting import get_currency_fraction
 from sentry_sdk.integrations.django import DjangoIntegration
+
+env = environ.Env(DEBUG=(bool, True))
+environ.Env.read_env()
 
 
 def get_list(text):
@@ -26,7 +30,7 @@ def get_bool_from_env(name, default_value):
     return default_value
 
 
-DEBUG = get_bool_from_env("DEBUG", True)
+DEBUG = env("DEBUG")
 
 SITE_ID = 1
 
@@ -41,8 +45,8 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
-ALLOWED_CLIENT_HOSTS = get_list(
-    os.environ.get("ALLOWED_CLIENT_HOSTS", "localhost,127.0.0.1")
+ALLOWED_STOREFRONT_HOSTS = get_list(
+    os.environ.get("ALLOWED_STOREFRONT_HOSTS", "localhost,127.0.0.1")
 )
 
 INTERNAL_IPS = get_list(os.environ.get("INTERNAL_IPS", "127.0.0.1"))
@@ -53,68 +57,23 @@ if REDIS_URL:
     CACHE_URL = os.environ.setdefault("CACHE_URL", REDIS_URL)
 CACHES = {"default": django_cache_url.config()}
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgres://saleor:saleor@localhost:5432/saleor", conn_max_age=600
-    )
-}
+DATABASES = {"default": env.db()}
 
 
-TIME_ZONE = "America/Chicago"
-LANGUAGE_CODE = "en"
-LANGUAGES = [
-    ("ar", _("Arabic")),
-    ("az", _("Azerbaijani")),
-    ("bg", _("Bulgarian")),
-    ("bn", _("Bengali")),
-    ("ca", _("Catalan")),
-    ("cs", _("Czech")),
-    ("da", _("Danish")),
-    ("de", _("German")),
-    ("el", _("Greek")),
-    ("en", _("English")),
-    ("es", _("Spanish")),
-    ("es-co", _("Colombian Spanish")),
-    ("et", _("Estonian")),
-    ("fa", _("Persian")),
-    ("fr", _("French")),
-    ("hi", _("Hindi")),
-    ("hu", _("Hungarian")),
-    ("hy", _("Armenian")),
-    ("id", _("Indonesian")),
-    ("is", _("Icelandic")),
-    ("it", _("Italian")),
-    ("ja", _("Japanese")),
-    ("ko", _("Korean")),
-    ("lt", _("Lithuanian")),
-    ("mn", _("Mongolian")),
-    ("nb", _("Norwegian")),
-    ("nl", _("Dutch")),
-    ("pl", _("Polish")),
-    ("pt", _("Portuguese")),
-    ("pt-br", _("Brazilian Portuguese")),
-    ("ro", _("Romanian")),
-    ("ru", _("Russian")),
-    ("sk", _("Slovak")),
-    ("sq", _("Albanian")),
-    ("sr", _("Serbian")),
-    ("sw", _("Swahili")),
-    ("sv", _("Swedish")),
-    ("th", _("Thai")),
-    ("tr", _("Turkish")),
-    ("uk", _("Ukrainian")),
-    ("vi", _("Vietnamese")),
-    ("zh-hans", _("Simplified Chinese")),
-    ("zh-hant", _("Traditional Chinese")),
-]
+TIME_ZONE = "America/Mexico_City"
+LANGUAGE_CODE = "es-mx"
+LANGUAGES = [("es-mx", _("Spanish"))]
 LOCALE_PATHS = [os.path.join(PROJECT_ROOT, "locale")]
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+USE_THOUSAND_SEPARATOR = True
+NUMBER_GROUPING = (3, 2, 0)
+DECIMAL_SEPARATOR = "."
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-EMAIL_URL = os.environ.get("EMAIL_URL")
+EMAIL_URL = env("EMAIL_URL")
 SENDGRID_USERNAME = os.environ.get("SENDGRID_USERNAME")
 SENDGRID_PASSWORD = os.environ.get("SENDGRID_PASSWORD")
 if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
@@ -138,8 +97,8 @@ ENABLE_SSL = get_bool_from_env("ENABLE_SSL", False)
 if ENABLE_SSL:
     SECURE_SSL_REDIRECT = not DEBUG
 
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
-ORDER_FROM_EMAIL = os.getenv("ORDER_FROM_EMAIL", DEFAULT_FROM_EMAIL)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+ORDER_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
 MEDIA_URL = os.environ.get("MEDIA_URL", "/media/")
@@ -198,8 +157,7 @@ TEMPLATES = [
     }
 ]
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -352,8 +310,8 @@ AUTH_PASSWORD_VALIDATORS = [
     }
 ]
 
-DEFAULT_COUNTRY = os.environ.get("DEFAULT_COUNTRY", "US")
-DEFAULT_CURRENCY = os.environ.get("DEFAULT_CURRENCY", "USD")
+DEFAULT_COUNTRY = os.environ.get("DEFAULT_COUNTRY", "MX")
+DEFAULT_CURRENCY = os.environ.get("DEFAULT_CURRENCY", "MXN")
 DEFAULT_DECIMAL_PLACES = get_currency_fraction(DEFAULT_CURRENCY)
 DEFAULT_MAX_DIGITS = 12
 DEFAULT_CURRENCY_CODE_LENGTH = 3
@@ -430,14 +388,14 @@ ALLOWED_GRAPHQL_ORIGINS = os.environ.get("ALLOWED_GRAPHQL_ORIGINS", "*")
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Amazon S3 configuration
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 AWS_LOCATION = os.environ.get("AWS_LOCATION", "")
-AWS_MEDIA_BUCKET_NAME = os.environ.get("AWS_MEDIA_BUCKET_NAME")
+AWS_MEDIA_BUCKET_NAME = env("AWS_MEDIA_BUCKET_NAME")
 AWS_MEDIA_CUSTOM_DOMAIN = os.environ.get("AWS_MEDIA_CUSTOM_DOMAIN")
 AWS_QUERYSTRING_AUTH = get_bool_from_env("AWS_QUERYSTRING_AUTH", False)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_STATIC_CUSTOM_DOMAIN")
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", None)
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_DEFAULT_ACL = os.environ.get("AWS_DEFAULT_ACL", None)
 
@@ -615,8 +573,15 @@ BRAINTREE = "braintree"
 RAZORPAY = "razorpay"
 STRIPE = "stripe"
 
+DUMMY = "dummy"
+BRAINTREE = "braintree"
+RAZORPAY = "razorpay"
+STRIPE = "stripe"
+
 CHECKOUT_PAYMENT_GATEWAYS = {
-    DUMMY: pgettext_lazy("Payment method name", "Dummy gateway")
+    STRIPE: pgettext_lazy(
+        "Método de pago", "Tarjeta de crédito con Stripe (Pago seguro)"
+    )
 }
 
 PAYMENT_GATEWAYS = {
@@ -661,12 +626,23 @@ PAYMENT_GATEWAYS = {
     STRIPE: {
         "module": "saleor.payment.gateways.stripe",
         "config": {
-            "store_card": get_bool_from_env("STRIPE_STORE_CARD", False),
-            "auto_capture": get_bool_from_env("STRIPE_AUTO_CAPTURE", True),
+            "store_card": env("STRIPE_STORE_CARD"),
+            "auto_capture": env("STRIPE_AUTO_CAPTURE"),
             "template_path": "order/payment/stripe.html",
             "connection_params": {
-                "public_key": os.environ.get("STRIPE_PUBLIC_KEY"),
-                "secret_key": os.environ.get("STRIPE_SECRET_KEY"),
+                "public_key": env("STRIPE_PUBLIC_KEY"),
+                "secret_key": env("STRIPE_SECRET_KEY"),
+                "store_name": os.environ.get("STRIPE_STORE_NAME", "NutriCass"),
+                "store_image": os.environ.get("STRIPE_STORE_IMAGE", None),
+                "prefill": get_bool_from_env("STRIPE_PREFILL", True),
+                "remember_me": os.environ.get("STRIPE_REMEMBER_ME", True),
+                "locale": os.environ.get("STRIPE_LOCALE", "es"),
+                "enable_billing_address": os.environ.get(
+                    "STRIPE_ENABLE_BILLING_ADDRESS", False
+                ),
+                "enable_shipping_address": os.environ.get(
+                    "STRIPE_ENABLE_SHIPPING_ADDRESS", False
+                ),
             },
         },
     },

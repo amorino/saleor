@@ -1,19 +1,22 @@
 .form-control,
 select,
 input {
-  color: $body-color;
-  border-radius: 8px;
-  border: 1px solid $gray;
+  color: #5d6168;
+  border-radius: 4px;
+  border: 1px solid #f1f3f4;
+  background: #f1f3f4;
   &:focus {
     color: $body-color;
     border-color: $gray;
-    background-color: $beige;
+    background-color: #f1f3f4;
     outline: none;
   }
   &::placeholder {
     color: $gray;
     font-family: $font-family-sans-serif;
-    font-weight: 300;
+  }
+  &[type="radio"] {
+    border-radius: 8px;
   }
   &[type="checkbox"] {
     -webkit-appearance: none;
@@ -95,11 +98,10 @@ input {
     }
   }
   .form-control {
-    height: 53px;
+    // height: 53px;
     width: 100%;
     border-radius: $button-border-radius;
-    padding: $global-padding;
-    font-size: 0.8rem;
+    // padding: $global-padding;
   }
   .btn {
     border-bottom-left-radius: 0;
@@ -109,10 +111,10 @@ input {
     top: 0;
     right: 0;
     cursor: pointer;
-    border-left: solid 1px $gray;
     outline: 0;
     display: flex;
     align-items: center;
+    padding: 10px 20px;
     @include transition(background, 0.3s) img {
       height: 1.5rem;
       padding: $global-padding / 7;
@@ -135,8 +137,8 @@ input {
     }
     .mobile-close-search {
       position: absolute;
-      top: 1.7rem;
-      left: 0.5rem;
+      top: 2rem;
+      left: 1rem;
     }
     .btn {
       border-radius: 0;

@@ -2,7 +2,7 @@
   margin-bottom: $global-margin * 5;
   h2,
   h3 {
-    text-transform: uppercase;
+    font-weight: 700;
     margin: 0 0 $global-margin * 2 0;
   }
   hr:not(.margin-default) {
@@ -24,29 +24,19 @@
         margin-top: 0;
       }
     }
+    h2 {
+      margin-bottom: 0;
+    }
+    a {
+      position: relative;
+    }
     a:hover {
       text-decoration: none;
     }
     svg {
-      vertical-align: baseline;
-      margin-right: $global-margin;
-      padding-bottom: 2px;
-      width: 113px;
-      @include media-breakpoint-down(sm) {
-        max-height: 34px;
-        vertical-align: text-bottom;
-        margin-right: 0;
-        padding-bottom: 5px;
-      }
-    }
-    h1 {
-      display: inline-block;
-      font-weight: 300;
-      text-transform: uppercase;
-      @include media-breakpoint-down(sm) {
-        font-size: 1.8rem;
-        margin-bottom: 0;
-      }
+      display: block;
+      width: 200px;
+      margin-right: 20px;
     }
   }
   &__login {
@@ -62,6 +52,10 @@
     }
     &__continue {
       padding: $global-padding * 2 0 $global-padding;
+      img {
+        width: 100%;
+        max-width: 300px;
+      }
     }
     &__form {
       background-color: $light-gray;
@@ -77,11 +71,15 @@
     }
   }
   &__review {
-    background-color: $light-gray;
+    background-color: $turquoise;
     padding: $global-padding $global-padding * 2;
     border-radius: 3px;
+    color: $white;
     h3 {
       margin: $global-margin 0;
+    }
+    .text-muted {
+      color: $light-gray !important;
     }
     &__section {
       border-top: 1px solid $gray;
@@ -106,7 +104,7 @@
       margin-bottom: $global-margin * 2;
     }
     &__variant {
-      color: $skull-gray;
+      color: $light-gray;
     }
     @include media-breakpoint-down(sm) {
       margin-top: $global-margin * 3;
@@ -117,6 +115,10 @@
     margin-top: $global-margin * 6;
     @include media-breakpoint-down(sm) {
       margin-top: $global-margin * 3;
+    }
+    img {
+      width: 100%;
+      max-width: 450px;
     }
     h3 {
       margin-bottom: $global-margin * 3;
@@ -129,7 +131,6 @@
     }
     h1 {
       font-weight: 300;
-      margin-top: -$global-margin * 4;
     }
     &__form {
       margin-top: $global-margin * 6;
@@ -213,10 +214,20 @@
     }
   }
   &__payment {
-    h3 {
+    .title {
+      text-align: center;
+    }
+    form {
+      text-align: center;
+    }
+    h2 {
       margin: $global-margin * 2 0 $global-margin;
     }
+    p {
+      text-align: center;
+    }
     &-form {
+      text-align: center;
       label {
         cursor: pointer;
         display: block;
@@ -353,6 +364,7 @@
     text-align: center;
     img {
       margin: $global-margin * 2 0;
+      max-width: 300px;
     }
     .btn {
       margin: $global-margin * 2 0 $global-margin * 5;

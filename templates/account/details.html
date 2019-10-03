@@ -125,21 +125,21 @@
         </div>
       </div>
       <div class="tab-pane fade" id="addresses" role="tabpanel">
-        <h3 class="text-sm-center">
+        <h2 class="text-sm-center">
           {% trans "Personal Data" context "User profile settings" %}
-        </h3>
-        <div class="row">
+        </h2>
+        <div class="row justify-content-md-center my-4">
           <div class="col-md-6">
-            <form action="" method="post">
+            <form class="text-center" action="" method="post">
               {% csrf_token %}
               {% bootstrap_form user_name_form %}
               <input type="submit" class="btn btn-primary narrow" value="{% trans "Update" context "User profile action" %}">
             </form>
           </div>
         </div>
-        <h3 class="text-sm-center">
+        <h2 class="text-sm-center">
           {% trans "Addresses" context "List of adresses in contact details" %}
-        </h3>
+        </h2>
         <div class="card-deck-wrapper account__addresses">
           <div class="row card-deck">
             {% for address in addresses %}
@@ -176,9 +176,7 @@
             <form action="{% url 'account:delete' %}" method="post">
               {% csrf_token %}
               <p>
-                {% blocktrans context "Message informing about the process of account removal" %}
-                  If you'd like to remove your account, please click on the button below and a confirmation email will be sent to you.
-                {% endblocktrans %}
+                {% trans "If you'd like to remove your account, please click on the button below and a confirmation email will be sent to you."  context "Message informing about the process of account removal" %}
               </p>
               <button type="submit" class="btn danger narrow text-center">
                 {% trans "Remove Account" context "Remove account form action" %}
